@@ -1,0 +1,51 @@
+{
+  "functions": {
+    "api/scan.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    },
+    "api/travel-planner.js": {
+      "maxDuration": 25,
+      "memory": 512
+    },
+    "api/vouchers.js": {
+      "maxDuration": 20,
+      "memory": 512
+    },
+    "api/explore.js": {
+      "maxDuration": 15,
+      "memory": 512
+    },
+    "api/nearby-places.js": {
+      "maxDuration": 15,
+      "memory": 512
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/vouchers?cron=1",
+      "schedule": "0 17 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/js/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

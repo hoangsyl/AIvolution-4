@@ -1,0 +1,24 @@
+{
+  "id": "/",
+  "name": "AIvolution — Quét AI Đà Nẵng – Hội An",
+  "short_name": "AIvolution",
+  "description": "Ứng dụng nhận diện địa điểm, món ăn và sản phẩm bằng AI tại Đà Nẵng – Hội An",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030303",
+  "theme_color": "#030303",
+  "icons": [
+    {
+      "src": "https://aitl-teal.vercel.app/IMG_1713.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://aitl-teal.vercel.app/IMG_1713.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

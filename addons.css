@@ -1,0 +1,460 @@
+/* AIvolution Addons: Auto Săn Voucher Hội An & AI Travel Planner
+ * Scoped strictly to #voucherModal and #plannerModal.
+ * Zero overrides of original style.css rules.
+ */
+
+.aiv-modal[hidden] {
+  display: none !important;
+}
+
+.aiv-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  font-family: inherit;
+}
+
+.aiv-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 6, 8, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.aiv-sheet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  max-height: min(88dvh, 780px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #141519;
+  color: #f4f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  animation: aivSheetIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-theme="light"] .aiv-sheet {
+  background: #f8f9fb;
+  color: #111318;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+}
+
+@keyframes aivSheetIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.aiv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="light"] .aiv-header {
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+.aiv-title-wrap {
+  min-width: 0;
+}
+
+.aiv-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.aiv-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  opacity: 0.72;
+}
+
+.aiv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.aiv-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+html[data-theme="light"] .aiv-icon-btn {
+  border-color: rgba(15, 23, 42, 0.12);
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.aiv-icon-btn:active {
+  transform: scale(0.92);
+}
+
+.aiv-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Search + Filter Pills */
+.aiv-search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.aiv-input,
+.aiv-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+html[data-theme="light"] .aiv-input,
+html[data-theme="light"] .aiv-select {
+  border-color: rgba(15, 23, 42, 0.14);
+  background: #ffffff;
+  color: #111318;
+}
+
+.aiv-input:focus,
+.aiv-select:focus {
+  border-color: #94d82d;
+}
+
+.aiv-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+  scrollbar-width: none;
+}
+
+.aiv-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.aiv-chip {
+  flex: 0 0 auto;
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+html[data-theme="light"] .aiv-chip {
+  border-color: rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+}
+
+.aiv-chip.active {
+  background: #94d82d;
+  color: #0b0b0d;
+  border-color: #94d82d;
+}
+
+.aiv-meta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: rgba(148, 216, 45, 0.12);
+  border: 1px solid rgba(148, 216, 45, 0.28);
+  font-size: 12px;
+}
+
+html[data-theme="light"] .aiv-meta-banner {
+  background: #eef8dc;
+  border-color: #cde69f;
+  color: #1e2d0b;
+}
+
+/* Voucher Cards */
+.aiv-voucher-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.aiv-vcard {
+  padding: 13px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+html[data-theme="light"] .aiv-vcard {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.09);
+}
+
+.aiv-vcard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.aiv-badge-discount {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #ddefb5;
+  color: #0b0b0d;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.aiv-badge-verified {
+  font-size: 11px;
+  opacity: 0.78;
+}
+
+.aiv-vcard-title {
+  margin: 0 0 4px;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.aiv-vcard-desc {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  opacity: 0.8;
+}
+
+.aiv-vcard-meta {
+  font-size: 11.5px;
+  opacity: 0.65;
+  margin-bottom: 10px;
+}
+
+.aiv-vcard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.aiv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+html[data-theme="light"] .aiv-btn {
+  border-color: rgba(15, 23, 42, 0.14);
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.aiv-btn-primary {
+  background: #94d82d;
+  color: #0b0b0d !important;
+  border-color: #94d82d;
+  font-weight: 700;
+}
+
+.aiv-btn-block {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 14.5px;
+  border-radius: 16px;
+}
+
+.aiv-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Planner Form & Output */
+.aiv-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.aiv-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.aiv-field-full {
+  grid-column: 1 / -1;
+}
+
+.aiv-label {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.aiv-plan-result {
+  margin-top: 14px;
+}
+
+.aiv-plan-header {
+  padding: 13px 14px;
+  border-radius: 18px;
+  background: #ddefb5;
+  color: #0b0b0d;
+  margin-bottom: 12px;
+}
+
+.aiv-plan-header h3 {
+  margin: 0 0 4px;
+  font-size: 15.5px;
+  font-weight: 800;
+}
+
+.aiv-plan-header p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.aiv-day-card {
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  margin-bottom: 10px;
+}
+
+html[data-theme="light"] .aiv-day-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.09);
+}
+
+.aiv-day-title {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #94d82d;
+}
+
+html[data-theme="light"] .aiv-day-title {
+  color: #4b7a06;
+}
+
+.aiv-slot {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+html[data-theme="light"] .aiv-slot {
+  border-top-color: rgba(15, 23, 42, 0.07);
+}
+
+.aiv-slot:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.aiv-slot-time {
+  flex: 0 0 54px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.aiv-slot-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.aiv-slot-place {
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.aiv-slot-act {
+  font-size: 12.5px;
+  opacity: 0.78;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.aiv-slot-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+}
+
+.aiv-slot-link {
+  color: #94d82d;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+html[data-theme="light"] .aiv-slot-link {
+  color: #4b7a06;
+}
+
+.aiv-empty {
+  text-align: center;
+  padding: 26px 14px;
+  font-size: 13.5px;
+  opacity: 0.75;
+}
